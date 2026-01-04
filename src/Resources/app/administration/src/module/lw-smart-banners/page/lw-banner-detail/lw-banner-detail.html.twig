@@ -1,0 +1,127 @@
+{% block lw_banner_detail %}
+<sw-page class="lw-banner-detail">
+    {% block lw_banner_detail_smart_bar_actions %}
+    <template #smart-bar-actions>
+        {% block lw_banner_detail_smart_bar_actions_cancel %}
+        <sw-button @click="onCancel">
+            {{ $tc('lw-smart-banners.detail.cancel') }}
+        </sw-button>
+        {% endblock %}
+
+        {% block lw_banner_detail_smart_bar_actions_save %}
+        <sw-button
+            variant="primary"
+            :is-loading="isLoading"
+            @click="onSave">
+            {{ $tc('lw-smart-banners.detail.save') }}
+        </sw-button>
+        {% endblock %}
+    </template>
+    {% endblock %}
+
+    {% block lw_banner_detail_content %}
+    <template #content>
+        <sw-card-view>
+            {% block lw_banner_detail_content_language_info %}
+            <sw-language-info
+                :entity-description="banner ? banner.name : ''">
+            </sw-language-info>
+            {% endblock %}
+
+            {% block lw_banner_detail_base_card %}
+            <sw-card
+                :title="$tc('lw-smart-banners.detail.basicInfo')"
+                :is-loading="isLoading">
+                <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0 30px">
+                    {% block lw_banner_detail_base_content_field_name %}
+                    <sw-text-field
+                        v-model="banner.name"
+                        :label="$tc('lw-smart-banners.detail.labelName')"
+                        :placeholder="$tc('lw-smart-banners.detail.placeholderName')"
+                        required
+                        validation="required">
+                    </sw-text-field>
+                    {% endblock %}
+
+                    {% block lw_banner_detail_base_content_field_type %}
+                    <sw-single-select
+                        :value="banner.type"
+                        @update:value="banner.type = $event"
+                        :label="$tc('lw-smart-banners.detail.labelType')"
+                        :options="typeOptions"
+                        required
+                        validation="required">
+                    </sw-single-select>
+                    {% endblock %}
+                </sw-container>
+
+                <sw-container columns="1fr" gap="0 30px">
+                    {% block lw_banner_detail_base_content_field_content %}
+                    <sw-textarea-field
+                        v-model="banner.content"
+                        :label="$tc('lw-smart-banners.detail.labelContent')"
+                        :placeholder="$tc('lw-smart-banners.detail.placeholderContent')"
+                        required
+                        validation="required">
+                    </sw-textarea-field>
+                    {% endblock %}
+                </sw-container>
+
+                <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0 30px">
+                    {% block lw_banner_detail_base_content_field_priority %}
+                    <sw-number-field
+                        v-model="banner.priority"
+                        :label="$tc('lw-smart-banners.detail.labelPriority')"
+                        :placeholder="$tc('lw-smart-banners.detail.placeholderPriority')"
+                        numberType="int">
+                    </sw-number-field>
+                    {% endblock %}
+
+                    {% block lw_banner_detail_base_content_field_css_class %}
+                    <sw-text-field
+                        v-model="banner.cssClass"
+                        :label="$tc('lw-smart-banners.detail.labelCssClass')"
+                        :placeholder="$tc('lw-smart-banners.detail.placeholderCssClass')">
+                    </sw-text-field>
+                    {% endblock %}
+                </sw-container>
+
+                <sw-container columns="1fr" gap="0 30px">
+                    {% block lw_banner_detail_base_content_field_active %}
+                    <sw-switch-field
+                        v-model:value="banner.active"
+                        :label="$tc('lw-smart-banners.detail.labelActive')">
+                    </sw-switch-field>
+                    {% endblock %}
+                </sw-container>
+            </sw-card>
+            {% endblock %}
+
+            {% block lw_banner_detail_schedule_card %}
+            <sw-card
+                :title="$tc('lw-smart-banners.detail.schedule')"
+                :is-loading="isLoading">
+                <sw-container columns="repeat(auto-fit, minmax(250px, 1fr))" gap="0 30px">
+                    {% block lw_banner_detail_schedule_field_active_from %}
+                    <sw-datepicker
+                        v-model="banner.activeFrom"
+                        :label="$tc('lw-smart-banners.detail.labelActiveFrom')"
+                        dateType="datetime-local">
+                    </sw-datepicker>
+                    {% endblock %}
+
+                    {% block lw_banner_detail_schedule_field_active_to %}
+                    <sw-datepicker
+                        v-model="banner.activeTo"
+                        :label="$tc('lw-smart-banners.detail.labelActiveTo')"
+                        dateType="datetime-local">
+                    </sw-datepicker>
+                    {% endblock %}
+                </sw-container>
+            </sw-card>
+            {% endblock %}
+        </sw-card-view>
+    </template>
+    {% endblock %}
+</sw-page>
+{% endblock %}

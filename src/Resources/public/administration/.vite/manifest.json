@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "assets/lw-smart-banners-Cwlu0Ne1.js",
+    "name": "lw-smart-banners",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/lw-smart-banners-DFJ1svRC.css"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+    "lw-smart-banners": {
+        "general": {
+            "mainMenuItemGeneral": "Smart Banners",
+            "description": "Manage your Smart Banners"
+        },
+        "list": {
+            "columnName": "Name",
+            "columnType": "Type",
+            "columnPriority": "Priority",
+            "columnActive": "Active",
+            "columnActiveFrom": "Active from",
+            "columnActiveTo": "Active to",
+            "searchPlaceholder": "Search banners...",
+            "addBanner": "Add banner",
+            "emptyStateTitle": "No banners yet",
+            "activate": "Activate",
+            "deactivate": "Deactivate",
+            "successDelete": "Banner deleted successfully",
+            "errorDelete": "Error deleting banner",
+            "successToggleActive": "Status changed successfully",
+            "errorToggleActive": "Error changing status",
+            "errorLoadingBanners": "Error loading banners",
+            "successSave": "Banner saved successfully",
+            "errorSave": "Error saving banner"
+        },
+        "detail": {
+            "basicInfo": "Basic information",
+            "schedule": "Schedule",
+            "labelName": "Name",
+            "placeholderName": "Enter banner name",
+            "labelContent": "Content",
+            "placeholderContent": "Enter banner content",
+            "labelType": "Type",
+            "typeInfo": "Information",
+            "typeSuccess": "Success",
+            "typeWarning": "Warning",
+            "typeDanger": "Danger",
+            "labelPriority": "Priority",
+            "placeholderPriority": "0",
+            "labelCssClass": "CSS class",
+            "placeholderCssClass": "Optional CSS class",
+            "labelActive": "Active",
+            "labelActiveFrom": "Active from",
+            "labelActiveTo": "Active to",
+            "save": "Save",
+            "cancel": "Cancel",
+            "successSave": "Banner saved successfully",
+            "errorSave": "Error saving banner",
+            "errorLoadingBanner": "Error loading banner"
+        }
+    }
+}

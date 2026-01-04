@@ -41,7 +41,7 @@ class BannerDefinition extends EntityDefinition
         return new FieldCollection([
             (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey(), new ApiAware()),
             
-            (new BoolField('active', 'active'))->addFlags(new Required(), new ApiAware()),
+            (new BoolField('active', 'active'))->addFlags(new ApiAware()),
             
             (new StringField('name', 'name'))->addFlags(new Required(), new ApiAware()),
             
