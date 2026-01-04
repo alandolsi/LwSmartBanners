@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-01-04
+
+### Fixed
+- Fixed timezone mismatch causing banners not to display
+- Changed date filtering from database criteria to PHP-level filtering
+- Now explicitly uses UTC timezone to match database timezone
+- Ensures consistent behavior regardless of server timezone configuration
+
 ## [0.1.0] - 2026-01-04
 
 ### Added
