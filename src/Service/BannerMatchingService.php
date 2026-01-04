@@ -24,36 +24,35 @@ class BannerMatchingService
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter('active', true));
         
-        $now = new \DateTime();
-        $criteria->addFilter(
-            new RangeFilter('activeFrom', [
-                RangeFilter::LTE => $now->format('Y-m-d H:i:s'),
-            ])
-        );
-        
-        $criteria->addFilter(
-            new RangeFilter('activeTo', [
-                RangeFilter::GTE => $now->format('Y-m-d H:i:s'),
-            ])
-        );
-        
         $criteria->addSorting(new FieldSorting('priority', FieldSorting::DESCENDING));
         $criteria->addAssociation('rule');
 
         /** @var BannerCollection $banners */
         $banners = $this->bannerRepository->search($criteria, $context->getContext())->getEntities();
 
-        return $this->filterByRules($banners, $context, $cart);
+        return $this->filterByDateAndRules($banners, $context, $cart);
     }
 
-    private function filterByRules(
+    private function filterByDateAndRules(
         BannerCollection $banners,
         SalesChannelContext $context,
         ?Cart $cart
     ): BannerCollection {
         $matched = new BannerCollection();
+        // Use UTC explicitly to match database timezone
+        $now = new \DateTime('now', new \DateTimeZone('UTC'));
 
         foreach ($banners as $banner) {
+            // Check date range
+            if ($banner->getActiveFrom() && $banner->getActiveFrom() > $now) {
+                continue;
+            }
+            
+            if ($banner->getActiveTo() && $banner->getActiveTo() < $now) {
+                continue;
+            }
+            
+            // Check rule
             if ($this->matchesRule($banner, $context, $cart)) {
                 $matched->add($banner);
             }
