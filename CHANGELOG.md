@@ -1,0 +1,128 @@
+# Changelog
+
+All notable changes to LwSmartBanners will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [0.1.0] - 2026-01-04
+
+### Added
+- Initial development release (Alpha)
+- Banner entity with database schema
+- Integration with Shopware rule system
+- Banner matching service for rule evaluation
+- Storefront subscriber for automatic rendering
+- Support for 4 banner types (info, success, warning, danger)
+- Priority-based sorting
+- Date/time scheduling (active_from, active_to)
+- Custom CSS class support
+- HTML content support
+- Responsive SCSS styling
+- Database migration
+- Shopware 6.6+ and 6.7+ compatibility
+
+### Notes
+- ⚠️ Alpha version - not production ready
+- Database-only banner management (no admin UI yet)
+- Breaking changes possible in future versions
+
+---
+
+## Planned Releases
+
+### v0.2.0 - Admin UI (Beta)
+**Target**: 2-3 weeks after v0.1.0  
+**Goal**: Shopware Store minimum requirements
+
+- [ ] Administration CRUD controller
+- [ ] Banner listing (data table)
+- [ ] Create/Edit form
+- [ ] Delete functionality
+- [ ] Basic form validation
+- [ ] Shopware rule selector integration
+- [ ] Banner type dropdown
+- [ ] Priority number input
+- [ ] Date/time inputs (HTML5)
+
+**Scope**: Simple HTML textarea for content (no rich text editor yet)
+
+### v0.3.0 - Testing & Polish (Release Candidate)
+**Target**: 1-2 weeks after v0.2.0  
+**Goal**: Production ready
+
+- [ ] Unit tests for core services
+- [ ] Integration tests
+- [ ] Code quality checks (PHPStan Level 8)
+- [ ] Performance optimization
+- [ ] Bug fixes from beta testing
+- [ ] Complete documentation
+- [ ] Shopware Store screenshots and description
+- [ ] Final QA testing
+
+### v1.0.0 - First Stable Release 🚀
+**Target**: 6-8 weeks after v0.1.0  
+**Goal**: Shopware Store publication
+
+**Release Criteria**:
+- ✅ Complete admin UI
+- ✅ All tests passing
+- ✅ No known bugs
+- ✅ Documentation complete
+- ✅ Shopware Store QA approved
+
+**Features**:
+- Admin UI for banner management
+- Rule-based targeting
+- 4 banner types with styling
+- Priority system
+- Date/time scheduling
+- Responsive storefront design
+- Professional documentation
+
+---
+
+## Post-Release Roadmap
+
+### v1.1.0 - Enhanced UI
+**Target**: After v1.0.0 launch  
+**Goal**: Improve user experience
+
+- [ ] Rich text editor for content (TinyMCE/CKEditor)
+- [ ] Banner preview in admin
+- [ ] Drag & drop priority sorting
+- [ ] Duplicate banner function
+- [ ] Bulk actions (activate/deactivate)
+
+### v1.2.0 - Advanced Features
+**Target**: 2-3 months after v1.0.0  
+**Goal**: Premium features
+
+- [ ] Banner templates (predefined layouts)
+- [ ] Custom banner positions (header, footer, sidebar)
+- [ ] Banner categories/tags
+- [ ] Export/import functionality
+- [ ] Banner scheduling improvements
+
+### v2.0.0 - Analytics & Multi-Language
+**Target**: 6+ months after v1.0.0  
+**Goal**: Enterprise features
+
+- [ ] Multi-language banner content
+- [ ] Banner analytics (impressions, clicks)
+- [ ] A/B testing capabilities
+- [ ] Advanced scheduling (weekdays, time ranges)
+- [ ] Performance dashboard
+- [ ] Conversion tracking
+
+### v3.0.0 - Marketing Automation
+**Target**: 12+ months after v1.0.0  
+**Goal**: Advanced marketing features
+
+- [ ] Personalization (customer group specific)
+- [ ] Dynamic content (placeholders)
+- [ ] Integration with marketing tools
+- [ ] REST API for external systems
+- [ ] Advanced analytics and reporting

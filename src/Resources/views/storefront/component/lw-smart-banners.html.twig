@@ -1,0 +1,18 @@
+{% block lw_smart_banners %}
+    {% if lwSmartBanners and lwSmartBanners|length > 0 %}
+        <div class="lw-smart-banners">
+            {% for banner in lwSmartBanners %}
+                {% block lw_smart_banner_item %}
+                    <div class="lw-smart-banner lw-smart-banner--{{ banner.type }} {{ banner.cssClass }}"
+                         data-lw-smart-banner-id="{{ banner.id }}">
+                        {% block lw_smart_banner_content %}
+                            <div class="lw-smart-banner-content">
+                                {{ banner.content|raw }}
+                            </div>
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

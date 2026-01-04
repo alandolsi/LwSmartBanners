@@ -1,0 +1,40 @@
+{
+    "name": "landolsi-webdesign/lw-smart-banners",
+    "description": "Smart Banners – Rule-based Store Messages for Shopware 6",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "version": "0.1.0",
+    "authors": [
+        {
+            "name": "Landolsi Webdesign",
+            "email": "info@landolsi.de"
+        }
+    ],
+    "require": {
+        "shopware/core": "~6.6.0 || ~6.7.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "LandolsiWebdesign\\LwSmartBanners\\LwSmartBanners",
+        "label": {
+            "de-DE": "Smart Banners – Regelbasierte Shop-Nachrichten",
+            "en-GB": "Smart Banners – Rule-based Store Messages"
+        },
+        "description": {
+            "de-DE": "Zeigen Sie kontextabhängige Banner im Storefront basierend auf Shopware-Regeln an",
+            "en-GB": "Display contextual banners in the storefront based on Shopware rules"
+        },
+        "manufacturerLink": {
+            "de-DE": "https://landolsi.de",
+            "en-GB": "https://landolsi.de"
+        },
+        "supportLink": {
+            "de-DE": "https://landolsi.de/support",
+            "en-GB": "https://landolsi.de/support"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "LandolsiWebdesign\\LwSmartBanners\\": "src/"
+        }
+    }
+}
