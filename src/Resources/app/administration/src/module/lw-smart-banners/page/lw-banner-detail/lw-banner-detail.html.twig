@@ -84,6 +84,18 @@
                         :placeholder="$tc('lw-smart-banners.detail.placeholderCssClass')">
                     </sw-text-field>
                     {% endblock %}
+
+                    {% block lw_banner_detail_base_content_field_rule %}
+                    <sw-entity-single-select
+                        v-model:value="banner.ruleId"
+                        entity="rule"
+                        :criteria="ruleCriteria"
+                        label-property="name"
+                        :label="$tc('lw-smart-banners.detail.labelRule')"
+                        :placeholder="$tc('lw-smart-banners.detail.placeholderRule')"
+                        :show-clearable-button="true">
+                    </sw-entity-single-select>
+                    {% endblock %}
                 </sw-container>
 
                 <sw-container columns="1fr" gap="0 30px">

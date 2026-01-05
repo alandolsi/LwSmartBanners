@@ -40,6 +40,8 @@
             "placeholderPriority": "0",
             "labelCssClass": "CSS class",
             "placeholderCssClass": "Optional CSS class",
+            "labelRule": "Rule",
+            "placeholderRule": "Select rule (optional)",
             "labelActive": "Active",
             "labelActiveFrom": "Active from",
             "labelActiveTo": "Active to",

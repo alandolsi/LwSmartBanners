@@ -47,6 +47,12 @@ Shopware.Component.register('lw-banner-detail', {
                 { value: 'warning', label: this.$tc('lw-smart-banners.detail.typeWarning') },
                 { value: 'danger', label: this.$tc('lw-smart-banners.detail.typeDanger') }
             ];
+        },
+
+        ruleCriteria() {
+            const criteria = new Criteria(1, 25);
+            criteria.addSorting(Criteria.sort('name', 'ASC'));
+            return criteria;
         }
     },
 
