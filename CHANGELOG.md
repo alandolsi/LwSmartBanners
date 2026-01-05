@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-01-05
+
+### Added
+- Admin: rule selector in banner detail form to target banners using Shopware rules
+
 ## [0.1.2] - 2026-01-05
 
 ### Fixed
@@ -60,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [ ] Create/Edit form
 - [ ] Delete functionality
 - [ ] Basic form validation
-- [ ] Shopware rule selector integration
+- [x] Shopware rule selector integration
 - [ ] Banner type dropdown
 - [ ] Priority number input
 - [ ] Date/time inputs (HTML5)
