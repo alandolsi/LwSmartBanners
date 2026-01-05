@@ -1,0 +1,53 @@
+{
+    "lw-smart-banners": {
+        "general": {
+            "mainMenuItemGeneral": "Smart Banners",
+            "description": "Verwalte deine Smart Banners"
+        },
+        "list": {
+            "columnName": "Name",
+            "columnType": "Typ",
+            "columnPriority": "Priorität",
+            "columnActive": "Aktiv",
+            "columnActiveFrom": "Aktiv von",
+            "columnActiveTo": "Aktiv bis",
+            "searchPlaceholder": "Banner durchsuchen...",
+            "addBanner": "Banner hinzufügen",
+            "emptyStateTitle": "Noch keine Banner vorhanden",
+            "activate": "Aktivieren",
+            "deactivate": "Deaktivieren",
+            "successDelete": "Banner erfolgreich gelöscht",
+            "errorDelete": "Fehler beim Löschen des Banners",
+            "successToggleActive": "Status erfolgreich geändert",
+            "errorToggleActive": "Fehler beim Ändern des Status",
+            "errorLoadingBanners": "Fehler beim Laden der Banner",
+            "successSave": "Banner erfolgreich gespeichert",
+            "errorSave": "Fehler beim Speichern des Banners"
+        },
+        "detail": {
+            "basicInfo": "Grundinformationen",
+            "schedule": "Zeitplanung",
+            "labelName": "Name",
+            "placeholderName": "Banner-Name eingeben",
+            "labelContent": "Inhalt",
+            "placeholderContent": "Banner-Inhalt eingeben",
+            "labelType": "Typ",
+            "typeInfo": "Information",
+            "typeSuccess": "Erfolg",
+            "typeWarning": "Warnung",
+            "typeDanger": "Fehler",
+            "labelPriority": "Priorität",
+            "placeholderPriority": "0",
+            "labelCssClass": "CSS-Klasse",
+            "placeholderCssClass": "Optionale CSS-Klasse",
+            "labelActive": "Aktiv",
+            "labelActiveFrom": "Aktiv von",
+            "labelActiveTo": "Aktiv bis",
+            "save": "Speichern",
+            "cancel": "Abbrechen",
+            "successSave": "Banner erfolgreich gespeichert",
+            "errorSave": "Fehler beim Speichern des Banners",
+            "errorLoadingBanner": "Fehler beim Laden des Banners"
+        }
+    }
+}

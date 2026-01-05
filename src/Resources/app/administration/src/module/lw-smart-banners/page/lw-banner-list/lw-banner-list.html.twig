@@ -1,0 +1,106 @@
+{% block lw_banner_list %}
+<sw-page class="lw-banner-list">
+    {% block lw_banner_list_search_bar %}
+    <template #search-bar>
+        <sw-search-bar
+            :initial-search-type="$tc('lw-smart-banners.general.mainMenuItemGeneral')"
+            :placeholder="$tc('lw-smart-banners.list.searchPlaceholder')"
+            @search="onSearch">
+        </sw-search-bar>
+    </template>
+    {% endblock %}
+
+    {% block lw_banner_list_smart_bar_header %}
+    <template #smart-bar-header>
+        <h2>
+            {{ $tc('lw-smart-banners.general.mainMenuItemGeneral') }}
+        </h2>
+    </template>
+    {% endblock %}
+
+    {% block lw_banner_list_smart_bar_actions %}
+    <template #smart-bar-actions>
+        {% block lw_banner_list_smart_bar_actions_add %}
+        <sw-button
+            :router-link="{ name: 'lw.smart.banners.create' }"
+            variant="primary">
+            {{ $tc('lw-smart-banners.list.addBanner') }}
+        </sw-button>
+        {% endblock %}
+    </template>
+    {% endblock %}
+
+    {% block lw_banner_list_content %}
+    <template #content>
+        <div class="lw-banner-list__content">
+            {% block lw_banner_list_grid %}
+            <sw-entity-listing
+                v-if="banners"
+                :items="banners"
+                :repository="bannerRepository"
+                :columns="bannerColumns"
+                :show-selection="true"
+                :is-loading="isLoading"
+                :sort-by="sortBy"
+                :sort-direction="sortDirection"
+                @column-sort="onSortColumn"
+                @page-change="onPageChange"
+                @delete="onDelete"
+                @inline-edit-save="onInlineEditSave"
+                detail-route="lw.smart.banners.detail">
+
+                {% block lw_banner_list_grid_columns %}
+                <template #column-type="{ item }">
+                    <sw-label
+                        :variant="getTypeVariant(item.type)"
+                        size="medium">
+                        {{ item.type }}
+                    </sw-label>
+                </template>
+
+                <template #column-active="{ item }">
+                    <span
+                        class="lw-banner-list__active-toggle"
+                        role="button"
+                        tabindex="0"
+                        @click.stop="onToggleActive(item)"
+                        @keydown.enter.stop="onToggleActive(item)"
+                    >
+                        <sw-icon
+                            :name="item.active ? 'regular-checkmark-xs' : 'regular-times-s'"
+                            :color="item.active ? '#37d046' : '#de294c'"
+                            small
+                        />
+                    </span>
+                </template>
+                {% endblock %}
+
+                {% block lw_banner_list_grid_more_actions %}
+                <template #more-actions="{ item }">
+                    <sw-context-menu-item @click="onToggleActive(item)">
+                        {{ item.active ? $tc('lw-smart-banners.list.deactivate') : $tc('lw-smart-banners.list.activate') }}
+                    </sw-context-menu-item>
+                </template>
+                {% endblock %}
+            </sw-entity-listing>
+            {% endblock %}
+
+            {% block lw_banner_list_empty_state %}
+            <sw-empty-state
+                v-else-if="!isLoading"
+                :title="$tc('lw-smart-banners.list.emptyStateTitle')"
+                icon="regular-megaphone">
+                <template #actions>
+                    <sw-button
+                        :router-link="{ name: 'lw.smart.banners.create' }"
+                        variant="primary">
+                        {{ $tc('lw-smart-banners.list.addBanner') }}
+                    </sw-button>
+                </template>
+            </sw-empty-state>
+            {% endblock %}
+        </div>
+    </template>
+    {% endblock %}
+</sw-page>
+{% endblock %}

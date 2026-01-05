@@ -10,7 +10,7 @@ class BannerEntity extends Entity
 {
     use EntityIdTrait;
 
-    protected bool $active;
+    protected ?bool $active = null;
 
     protected ?string $name;
 
@@ -30,14 +30,19 @@ class BannerEntity extends Entity
 
     protected ?\DateTimeInterface $activeTo;
 
-    public function isActive(): bool
+    public function getActive(): bool
     {
-        return $this->active;
+        return (bool) $this->active;
     }
 
     public function setActive(bool $active): void
     {
         $this->active = $active;
+    }
+
+    public function isActive(): bool
+    {
+        return (bool) $this->active;
     }
 
     public function getName(): ?string

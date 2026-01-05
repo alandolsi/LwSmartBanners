@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-01-05
+
+### Fixed
+- Admin: banner listing now updates the "Active" state correctly (list + detail)
+- Admin: remove unwanted/empty listing spacer column and fix clipped action texts
+- Admin: allow toggling active state by clicking the status icon
+
+### Chore
+- Removed debug/hotfix artifacts from the plugin bundle
+
 ## [0.1.1] - 2026-01-04
 
 ### Fixed

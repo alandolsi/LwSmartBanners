@@ -25,5 +25,16 @@
             </call>
             <tag name="controller.service_arguments"/>
         </service>
+
+        <!-- CLI Commands -->
+        <service id="LandolsiWebdesign\LwSmartBanners\Command\BannerToggleCommand">
+            <argument type="service" id="lw_smart_banner.repository"/>
+            <tag name="console.command"/>
+        </service>
+
+        <service id="LandolsiWebdesign\LwSmartBanners\Command\BannerDebugCommand">
+            <argument type="service" id="lw_smart_banner.repository"/>
+            <tag name="console.command"/>
+        </service>
     </services>
 </container>
