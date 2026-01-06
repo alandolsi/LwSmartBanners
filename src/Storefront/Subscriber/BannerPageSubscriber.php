@@ -3,13 +3,15 @@
 namespace LandolsiWebdesign\LwSmartBanners\Storefront\Subscriber;
 
 use LandolsiWebdesign\LwSmartBanners\Service\BannerMatchingService;
+use Shopware\Core\Checkout\Cart\SalesChannel\CartService;
 use Shopware\Storefront\Event\StorefrontRenderEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class BannerPageSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly BannerMatchingService $bannerMatchingService
+        private readonly BannerMatchingService $bannerMatchingService,
+        private readonly CartService $cartService
     ) {
     }
 
@@ -23,13 +25,11 @@ class BannerPageSubscriber implements EventSubscriberInterface
     public function onStorefrontRender(StorefrontRenderEvent $event): void
     {
         $context = $event->getSalesChannelContext();
-        $cart = null;
 
-        if (method_exists($event->getRequest(), 'getSession')) {
-            $session = $event->getRequest()->getSession();
-            if ($session && $session->has('cart')) {
-                $cart = $session->get('cart');
-            }
+        try {
+            $cart = $this->cartService->getCart($context->getToken(), $context);
+        } catch (\Throwable) {
+            $cart = null;
         }
 
         $matchingBanners = $this->bannerMatchingService->getMatchingBanners($context, $cart);
