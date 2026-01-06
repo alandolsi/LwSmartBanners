@@ -62,47 +62,40 @@ bin/console theme:compile
 
 ## 📖 Usage
 
-### Creating Banners (v0.1.0 - Database Only)
+### Managing Banners (v0.2.0+ - Administration UI)
 
-Currently in v0.1.0, banners are created directly in the database. Administration UI will be available in v0.2.0.
+1. Go to **Administration → Content → Smart Banners**
+2. Click **Add banner**
+3. Fill the required fields:
+   - **Name**
+   - **Type** (info/success/warning/danger)
+   - **Content** (HTML is supported)
+4. Optional fields:
+   - **Rule** (banner shows only if the selected Shopware rule matches)
+   - **Priority** (higher = shown first)
+   - **Active from / Active to** (schedule)
+   - **CSS class** (custom styling)
 
-```sql
-INSERT INTO lw_smart_banner (
-    id,
-    active,
-    name,
-    content,
-    type,
-    priority,
-    active_from,
-    active_to,
-    created_at
-) VALUES (
-    UNHEX(REPLACE(UUID(), '-', '')),
-    1,
-    'Welcome Banner',
-    '<p><strong>Welcome!</strong> Get 10% off with code: <strong>WELCOME10</strong></p>',
-    'info',
-    100,
-    NOW(),
-    DATE_ADD(NOW(), INTERVAL 30 DAY),
-    NOW()
-);
-```
+### Listing Features
 
-### Banner Types
+- Search by name
+- Filter by **Type** and **Status** (active/inactive)
+- **Duplicate** banner from the row actions menu
 
-- `info` - Blue background for informational messages
-- `success` - Green background for positive messages  
-- `warning` - Yellow background for warnings
-- `danger` - Red background for critical messages
+### Edit / Delete
 
-### Rule Integration
+- Open a banner to edit and click **Save**
+- **Delete** is available in the detail view (with confirmation)
+- Validation prevents saving if required fields are missing
 
-1. Create a rule in Shopware Admin (Marketing → Promotions → Create Rule)
-2. Copy the rule ID
-3. Set `rule_id` in your banner to the rule's ID
-4. The banner will only display when the rule matches
+### Where Banners Are Shown (Default)
+
+- Below the header navigation
+- Offcanvas cart
+- Cart page
+- Checkout confirm + finish
+
+> Note: Cart-based rules (e.g. cart total >= 50€) only match when products are in the cart; they won’t match on a product detail page.
 
 ---
 
@@ -165,12 +158,11 @@ Default position is below the header. Override the template to change:
 
 ## 🗺️ Roadmap
 
-### v0.2.0 - Admin UI (Next Release)
-**Target**: 2-3 weeks  
-- Administration UI for CRUD operations
-- Banner list view with sorting
-- Create/Edit forms
-- Delete functionality
+### v0.2.0 - Admin UI (Released)
+- Administration module for banner management
+- Listing with search/filters and duplicate action
+- Create/Edit form with validation
+- Delete with confirmation
 - Rule selector integration
 
 ### v0.3.0 - Testing & Polish
