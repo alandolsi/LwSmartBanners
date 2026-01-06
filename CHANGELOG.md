@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-01-06
+
+### Added
+- Storefront: show banners in offcanvas cart, cart, checkout confirm and finish
+
+### Fixed
+- Storefront: cart-based rule matching now uses CartService (reliable cart context)
+
 ## [0.2.1] - 2026-01-06
 
 ### Added

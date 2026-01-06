@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/component/checkout/offcanvas-cart.html.twig' %}
+
+{% block component_offcanvas_cart_flashbags %}
+    {{ parent() }}
+
+    {% sw_include '@LwSmartBanners/storefront/component/lw-smart-banners.html.twig' %}
+{% endblock %}
