@@ -22,7 +22,17 @@
             "errorToggleActive": "Error changing status",
             "errorLoadingBanners": "Error loading banners",
             "successSave": "Banner saved successfully",
-            "errorSave": "Error saving banner"
+            "errorSave": "Error saving banner",
+            "duplicate": "Duplicate",
+            "successDuplicate": "Banner duplicated successfully",
+            "errorDuplicate": "Error duplicating banner",
+            "copySuffix": " (Copy)",
+            "filterTypeLabel": "Type",
+            "filterActiveLabel": "Status",
+            "filterAllTypes": "All types",
+            "filterAllStatuses": "All",
+            "filterActive": "Active",
+            "filterInactive": "Inactive"
         },
         "detail": {
             "basicInfo": "Basic information",
