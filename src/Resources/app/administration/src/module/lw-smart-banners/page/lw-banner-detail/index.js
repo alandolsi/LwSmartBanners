@@ -17,7 +17,8 @@ Shopware.Component.register('lw-banner-detail', {
             banner: null,
             isLoading: false,
             processSuccess: false,
-            bannerId: null
+            bannerId: null,
+            showDeleteModal: false
         };
     },
 
@@ -53,6 +54,14 @@ Shopware.Component.register('lw-banner-detail', {
             const criteria = new Criteria(1, 25);
             criteria.addSorting(Criteria.sort('name', 'ASC'));
             return criteria;
+        },
+
+        isSaveDisabled() {
+            if (this.isLoading || !this.banner) {
+                return true;
+            }
+
+            return !this.banner.name || !this.banner.name.trim() || !this.banner.content || !this.banner.content.trim() || !this.banner.type;
         }
     },
 
@@ -69,6 +78,7 @@ Shopware.Component.register('lw-banner-detail', {
                 this.banner.type = 'info';
             } else {
                 this.bannerId = this.$route.params.id;
+                this.banner = this.bannerRepository.create(Shopware.Context.api);
                 this.loadBanner();
             }
         },
@@ -87,15 +97,34 @@ Shopware.Component.register('lw-banner-detail', {
             }
         },
 
+        isBannerValid() {
+            if (!this.banner) {
+                return false;
+            }
+
+            return !!(
+                this.banner.name && this.banner.name.trim() &&
+                this.banner.content && this.banner.content.trim() &&
+                this.banner.type
+            );
+        },
+
         async onSave() {
+            if (!this.isBannerValid()) {
+                this.createNotificationError({
+                    message: this.$tc('lw-smart-banners.detail.errorValidation')
+                });
+                return;
+            }
+
             this.isLoading = true;
 
             try {
                 await this.bannerRepository.save(this.banner);
-                
+
                 this.isLoading = false;
                 this.processSuccess = true;
-                
+
                 this.createNotificationSuccess({
                     message: this.$tc('lw-smart-banners.detail.successSave')
                 });
@@ -111,6 +140,35 @@ Shopware.Component.register('lw-banner-detail', {
                 this.createNotificationError({
                     message: this.$tc('lw-smart-banners.detail.errorSave')
                 });
+            }
+        },
+
+        onDelete() {
+            this.showDeleteModal = true;
+        },
+
+        onCloseDeleteModal() {
+            this.showDeleteModal = false;
+        },
+
+        async onConfirmDelete() {
+            this.isLoading = true;
+
+            try {
+                await this.bannerRepository.delete(this.banner.id);
+
+                this.createNotificationSuccess({
+                    message: this.$tc('lw-smart-banners.detail.successDelete')
+                });
+
+                this.$router.push({ name: 'lw.smart.banners.list' });
+            } catch (error) {
+                this.createNotificationError({
+                    message: this.$tc('lw-smart-banners.detail.errorDelete')
+                });
+            } finally {
+                this.isLoading = false;
+                this.showDeleteModal = false;
             }
         },
 

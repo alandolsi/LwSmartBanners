@@ -12,8 +12,19 @@
         <sw-button
             variant="primary"
             :is-loading="isLoading"
+            :disabled="isSaveDisabled"
             @click="onSave">
             {{ $tc('lw-smart-banners.detail.save') }}
+        </sw-button>
+        {% endblock %}
+
+        {% block lw_banner_detail_smart_bar_actions_delete %}
+        <sw-button
+            v-if="!isCreateMode"
+            variant="danger"
+            :disabled="isLoading"
+            @click="onDelete">
+            {{ $tc('lw-smart-banners.detail.delete') }}
         </sw-button>
         {% endblock %}
     </template>
@@ -135,5 +146,25 @@
         </sw-card-view>
     </template>
     {% endblock %}
+
+    <sw-modal
+        v-if="showDeleteModal"
+        :title="$tc('lw-smart-banners.detail.deleteConfirmTitle')"
+        @modal-close="onCloseDeleteModal">
+        <p>{{ $tc('lw-smart-banners.detail.deleteConfirmText') }}</p>
+
+        <template #modal-footer>
+            <sw-button @click="onCloseDeleteModal">
+                {{ $tc('lw-smart-banners.detail.cancel') }}
+            </sw-button>
+
+            <sw-button
+                variant="danger"
+                :is-loading="isLoading"
+                @click="onConfirmDelete">
+                {{ $tc('lw-smart-banners.detail.deleteConfirmButton') }}
+            </sw-button>
+        </template>
+    </sw-modal>
 </sw-page>
 {% endblock %}
