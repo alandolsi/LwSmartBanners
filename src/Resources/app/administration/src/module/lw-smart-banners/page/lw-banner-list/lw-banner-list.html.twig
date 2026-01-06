@@ -33,6 +33,27 @@
     {% block lw_banner_list_content %}
     <template #content>
         <div class="lw-banner-list__content">
+            {% block lw_banner_list_filters %}
+            <sw-container
+                class="lw-banner-list__filters"
+                columns="repeat(auto-fit, minmax(200px, 1fr))"
+                gap="0 16px">
+                <sw-single-select
+                    :value="filterType"
+                    @update:value="onFilterType"
+                    :label="$tc('lw-smart-banners.list.filterTypeLabel')"
+                    :options="filterTypeOptions">
+                </sw-single-select>
+
+                <sw-single-select
+                    :value="filterActive"
+                    @update:value="onFilterActive"
+                    :label="$tc('lw-smart-banners.list.filterActiveLabel')"
+                    :options="filterActiveOptions">
+                </sw-single-select>
+            </sw-container>
+            {% endblock %}
+
             {% block lw_banner_list_grid %}
             <sw-entity-listing
                 v-if="banners"
@@ -77,6 +98,10 @@
 
                 {% block lw_banner_list_grid_more_actions %}
                 <template #more-actions="{ item }">
+                    <sw-context-menu-item @click="onDuplicate(item)">
+                        {{ $tc('lw-smart-banners.list.duplicate') }}
+                    </sw-context-menu-item>
+
                     <sw-context-menu-item @click="onToggleActive(item)">
                         {{ item.active ? $tc('lw-smart-banners.list.deactivate') : $tc('lw-smart-banners.list.activate') }}
                     </sw-context-menu-item>

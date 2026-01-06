@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-01-06
+
+### Added
+- Admin: banner listing filters (type + active status)
+- Admin: duplicate banner action from listing
+
+### Changed
+- Administration build artifacts updated for release (vite manifest/assets)
+
 ## [0.1.3] - 2026-01-05
 
 ### Added

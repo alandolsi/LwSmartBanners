@@ -22,8 +22,8 @@ Shopware.Component.register('lw-banner-list', {
             sortBy: 'priority',
             sortDirection: 'DESC',
             searchTerm: '',
-            filterType: null,
-            filterActive: null
+            filterType: 'all',
+            filterActive: 'all'
         };
     },
 
@@ -78,15 +78,33 @@ Shopware.Component.register('lw-banner-list', {
                 criteria.addSorting(Criteria.sort(this.sortBy, this.sortDirection));
             }
 
-            if (this.filterType) {
+            if (this.filterType !== 'all') {
                 criteria.addFilter(Criteria.equals('type', this.filterType));
             }
 
-            if (this.filterActive !== null) {
-                criteria.addFilter(Criteria.equals('active', this.filterActive));
+            if (this.filterActive !== 'all') {
+                criteria.addFilter(Criteria.equals('active', this.filterActive === 'active'));
             }
 
             return criteria;
+        },
+
+        filterTypeOptions() {
+            return [
+                { value: 'all', label: this.$tc('lw-smart-banners.list.filterAllTypes') },
+                { value: 'info', label: this.$tc('lw-smart-banners.detail.typeInfo') },
+                { value: 'success', label: this.$tc('lw-smart-banners.detail.typeSuccess') },
+                { value: 'warning', label: this.$tc('lw-smart-banners.detail.typeWarning') },
+                { value: 'danger', label: this.$tc('lw-smart-banners.detail.typeDanger') }
+            ];
+        },
+
+        filterActiveOptions() {
+            return [
+                { value: 'all', label: this.$tc('lw-smart-banners.list.filterAllStatuses') },
+                { value: 'active', label: this.$tc('lw-smart-banners.list.filterActive') },
+                { value: 'inactive', label: this.$tc('lw-smart-banners.list.filterInactive') }
+            ];
         }
     },
 
@@ -143,6 +161,33 @@ Shopware.Component.register('lw-banner-list', {
             this.filterActive = active;
             this.page = 1;
             this.loadBanners();
+        },
+
+        async onDuplicate(item) {
+            const duplicated = this.bannerRepository.create(Shopware.Context.api);
+
+            duplicated.name = `${item.name}${this.$tc('lw-smart-banners.list.copySuffix')}`;
+            duplicated.content = item.content;
+            duplicated.type = item.type;
+            duplicated.priority = item.priority;
+            duplicated.active = item.active;
+            duplicated.cssClass = item.cssClass;
+            duplicated.ruleId = item.ruleId;
+            duplicated.activeFrom = item.activeFrom;
+            duplicated.activeTo = item.activeTo;
+
+            try {
+                await this.bannerRepository.save(duplicated);
+                this.createNotificationSuccess({
+                    message: this.$tc('lw-smart-banners.list.successDuplicate')
+                });
+
+                this.$router.push({ name: 'lw.smart.banners.detail', params: { id: duplicated.id } });
+            } catch (error) {
+                this.createNotificationError({
+                    message: this.$tc('lw-smart-banners.list.errorDuplicate')
+                });
+            }
         },
 
         onRefresh() {
