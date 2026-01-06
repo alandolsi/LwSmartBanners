@@ -228,14 +228,13 @@ LwSmartBanners/
 - ⚠️ No admin UI (manual SQL only)
 
 ### v0.2.0 - Admin UI (Beta)
-**Target**: 2-3 weeks  
-**Goal**: Shopware Store minimum requirements
+**Status**: ✅ Implemented (iterating with patch releases)
 
-- [ ] Administration CRUD controller
-- [ ] Banner listing (data table)
-- [ ] Create/Edit forms
-- [ ] Form validation
-- [ ] Rule selector integration
+- [x] Banner listing (search/filters/duplicate)
+- [x] Create/Edit forms
+- [x] Form validation
+- [x] Delete functionality
+- [x] Rule selector integration
 
 ### v0.3.0 - Testing & Polish (RC)
 **Target**: 1-2 weeks after v0.2.0  
