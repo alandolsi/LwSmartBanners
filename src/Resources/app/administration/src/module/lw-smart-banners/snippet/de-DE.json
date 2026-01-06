@@ -57,9 +57,16 @@
             "labelActiveTo": "Aktiv bis",
             "save": "Speichern",
             "cancel": "Abbrechen",
+            "delete": "Löschen",
+            "deleteConfirmTitle": "Banner löschen",
+            "deleteConfirmText": "Möchtest du dieses Banner wirklich löschen?",
+            "deleteConfirmButton": "Löschen",
             "successSave": "Banner erfolgreich gespeichert",
             "errorSave": "Fehler beim Speichern des Banners",
-            "errorLoadingBanner": "Fehler beim Laden des Banners"
+            "successDelete": "Banner erfolgreich gelöscht",
+            "errorDelete": "Fehler beim Löschen des Banners",
+            "errorLoadingBanner": "Fehler beim Laden des Banners",
+            "errorValidation": "Bitte fülle alle Pflichtfelder aus."
         }
     }
 }

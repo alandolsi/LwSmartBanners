@@ -57,9 +57,16 @@
             "labelActiveTo": "Active to",
             "save": "Save",
             "cancel": "Cancel",
+            "delete": "Delete",
+            "deleteConfirmTitle": "Delete banner",
+            "deleteConfirmText": "Do you really want to delete this banner?",
+            "deleteConfirmButton": "Delete",
             "successSave": "Banner saved successfully",
             "errorSave": "Error saving banner",
-            "errorLoadingBanner": "Error loading banner"
+            "successDelete": "Banner deleted successfully",
+            "errorDelete": "Error deleting banner",
+            "errorLoadingBanner": "Error loading banner",
+            "errorValidation": "Please fill all required fields."
         }
     }
 }
