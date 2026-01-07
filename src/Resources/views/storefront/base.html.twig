@@ -1,0 +1,8 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_body_inner %}
+    {{ parent() }}
+
+    {# Render overlay/toast banners globally (independent of theme header blocks) #}
+    {% sw_include '@LwSmartBanners/storefront/component/lw-smart-banners.html.twig' with { lwSmartBannersOverlayOnly: true } %}
+{% endblock %}

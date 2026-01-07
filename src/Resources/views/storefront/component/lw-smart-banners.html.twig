@@ -1,14 +1,23 @@
 {% block lw_smart_banners %}
     {% set position = lwSmartBannersPosition|default(null) %}
+    {% set overlayOnly = lwSmartBannersOverlayOnly|default(false) %}
 
     {% if lwSmartBanners and lwSmartBanners|length > 0 %}
         {% set visibleBanners = [] %}
 
         {% for banner in lwSmartBanners %}
+            {% set displayMode = banner.displayMode ?: 'inline' %}
             {% set showBanner = true %}
 
-            {% if position %}
-                {% set showBanner = (banner.positions is empty) or (position in banner.positions) %}
+            {% if overlayOnly %}
+                {% set showBanner = displayMode == 'overlay' %}
+            {% else %}
+                {# Inline includes should not render overlay banners to avoid duplicates #}
+                {% set showBanner = displayMode != 'overlay' %}
+
+                {% if position %}
+                    {% set showBanner = showBanner and ((banner.positions is empty) or (position in banner.positions)) %}
+                {% endif %}
             {% endif %}
 
             {% if showBanner %}
@@ -20,7 +29,10 @@
             <div class="lw-smart-banners">
                 {% for banner in visibleBanners %}
                     {% block lw_smart_banner_item %}
-                        <div class="lw-smart-banner lw-smart-banner--{{ banner.type }} {{ banner.cssClass }}"
+                        {% set displayMode = banner.displayMode ?: 'inline' %}
+                        {% set overlayAlignment = banner.overlayAlignment ?: 'bottom-right' %}
+
+                        <div class="lw-smart-banner lw-smart-banner--{{ banner.type }} lw-smart-banner--display-{{ displayMode }} lw-smart-banner--align-{{ overlayAlignment }} {{ banner.cssClass }}"
                              data-lw-smart-banner-id="{{ banner.id }}">
                             {% block lw_smart_banner_content %}
                                 <div class="lw-smart-banner-content">

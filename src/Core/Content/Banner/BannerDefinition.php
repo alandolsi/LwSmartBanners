@@ -53,6 +53,10 @@ class BannerDefinition extends EntityDefinition
             (new StringField('css_class', 'cssClass'))->addFlags(new ApiAware()),
 
             (new JsonField('positions', 'positions'))->addFlags(new ApiAware()),
+
+            (new StringField('display_mode', 'displayMode'))->addFlags(new ApiAware()),
+
+            (new StringField('overlay_alignment', 'overlayAlignment'))->addFlags(new ApiAware()),
             
             (new FkField('rule_id', 'ruleId', RuleDefinition::class))->addFlags(new ApiAware()),
             
