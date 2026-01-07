@@ -3,5 +3,5 @@
 {% block layout_header_navigation %}
     {{ parent() }}
     
-    {% sw_include '@LwSmartBanners/storefront/component/lw-smart-banners.html.twig' %}
+    {% sw_include '@LwSmartBanners/storefront/component/lw-smart-banners.html.twig' with { lwSmartBannersPosition: 'header' } %}
 {% endblock %}

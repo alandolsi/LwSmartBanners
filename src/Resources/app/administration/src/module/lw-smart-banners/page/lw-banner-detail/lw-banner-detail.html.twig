@@ -96,6 +96,16 @@
                     </sw-text-field>
                     {% endblock %}
 
+                    {% block lw_banner_detail_base_content_field_positions %}
+                    <sw-multi-select
+                        :label="$tc('lw-smart-banners.detail.labelPositions')"
+                        :helpText="$tc('lw-smart-banners.detail.helpPositions')"
+                        :options="positionOptions"
+                        :value="banner.positions"
+                        @update:value="banner.positions = $event">
+                    </sw-multi-select>
+                    {% endblock %}
+
                     {% block lw_banner_detail_base_content_field_rule %}
                     <sw-entity-single-select
                         v-model:value="banner.ruleId"

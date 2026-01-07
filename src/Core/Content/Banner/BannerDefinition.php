@@ -11,6 +11,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\IntField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\JsonField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\LongTextField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToOneAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
@@ -50,6 +51,8 @@ class BannerDefinition extends EntityDefinition
             (new StringField('type', 'type'))->addFlags(new Required(), new ApiAware()),
             
             (new StringField('css_class', 'cssClass'))->addFlags(new ApiAware()),
+
+            (new JsonField('positions', 'positions'))->addFlags(new ApiAware()),
             
             (new FkField('rule_id', 'ruleId', RuleDefinition::class))->addFlags(new ApiAware()),
             
