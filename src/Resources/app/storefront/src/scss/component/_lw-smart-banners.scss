@@ -2,10 +2,39 @@
     width: 100%;
 }
 
+.lw-js {
+    .lw-smart-banner--dismiss-pending {
+        display: none;
+    }
+}
+
 .lw-smart-banner {
+    position: relative;
     padding: 1rem;
     margin-bottom: 0.5rem;
     border-radius: 0.25rem;
+
+    &--dismissible {
+        padding-right: 2.5rem;
+    }
+
+    &__close {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.5rem;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: inherit;
+        cursor: pointer;
+        opacity: 0.7;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
 
     &--display-overlay {
         position: fixed;

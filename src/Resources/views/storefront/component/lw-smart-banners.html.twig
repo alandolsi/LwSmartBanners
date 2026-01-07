@@ -31,9 +31,19 @@
                     {% block lw_smart_banner_item %}
                         {% set displayMode = banner.displayMode ?: 'inline' %}
                         {% set overlayAlignment = banner.overlayAlignment ?: 'bottom-right' %}
+                        {% set dismissible = banner.dismissible ?: false %}
+                        {% set dismissScope = banner.dismissScope ?: 'forever' %}
+                        {% set dismissTtlSeconds = banner.dismissTtlSeconds ?: null %}
 
-                        <div class="lw-smart-banner lw-smart-banner--{{ banner.type }} lw-smart-banner--display-{{ displayMode }} lw-smart-banner--align-{{ overlayAlignment }} {{ banner.cssClass }}"
-                             data-lw-smart-banner-id="{{ banner.id }}">
+                        <div class="lw-smart-banner lw-smart-banner--{{ banner.type }} lw-smart-banner--display-{{ displayMode }} lw-smart-banner--align-{{ overlayAlignment }} {{ dismissible ? 'lw-smart-banner--dismissible lw-smart-banner--dismiss-pending' : '' }} {{ banner.cssClass }}"
+                             data-lw-smart-banner-id="{{ banner.id }}"
+                             data-lw-smart-banner-dismissible="{{ dismissible ? '1' : '0' }}"
+                             data-lw-smart-banner-dismiss-scope="{{ dismissScope }}"
+                             data-lw-smart-banner-dismiss-ttl-seconds="{{ dismissTtlSeconds }}">
+                            {% if dismissible %}
+                                <button type="button" class="lw-smart-banner__close" aria-label="Close">&times;</button>
+                            {% endif %}
+
                             {% block lw_smart_banner_content %}
                                 <div class="lw-smart-banner-content">
                                     {{ banner.content|raw }}
@@ -43,6 +53,120 @@
                     {% endblock %}
                 {% endfor %}
             </div>
+
+            <script>
+                (function () {
+
+                    function getKey(id) {
+                        return 'lwSmartBanners:dismissed:' + id;
+                    }
+
+                    function removeBanner(el) {
+                        var container = el.closest('.lw-smart-banners');
+                        el.remove();
+
+                        if (container && container.querySelectorAll('.lw-smart-banner').length === 0) {
+                            container.remove();
+                        }
+                    }
+
+                    function isDismissed(el) {
+                        var scope = el.getAttribute('data-lw-smart-banner-dismiss-scope') || 'forever';
+                        var id = el.getAttribute('data-lw-smart-banner-id');
+                        var key = getKey(id);
+
+                        try {
+                            if (scope === 'session') {
+                                return window.sessionStorage.getItem(key) === '1';
+                            }
+
+                            if (scope === 'ttl') {
+                                var value = window.localStorage.getItem(key);
+
+                                if (!value) {
+                                    return false;
+                                }
+
+                                var expiresAt = parseInt(value, 10);
+
+                                if (Number.isNaN(expiresAt)) {
+                                    window.localStorage.removeItem(key);
+                                    return false;
+                                }
+
+                                if (Date.now() < expiresAt) {
+                                    return true;
+                                }
+
+                                window.localStorage.removeItem(key);
+                                return false;
+                            }
+
+                            return window.localStorage.getItem(key) === '1';
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+
+                    function persistDismiss(el) {
+                        var scope = el.getAttribute('data-lw-smart-banner-dismiss-scope') || 'forever';
+                        var ttlSeconds = parseInt(el.getAttribute('data-lw-smart-banner-dismiss-ttl-seconds'), 10);
+                        var id = el.getAttribute('data-lw-smart-banner-id');
+                        var key = getKey(id);
+
+                        try {
+                            if (scope === 'session') {
+                                window.sessionStorage.setItem(key, '1');
+                                return;
+                            }
+
+                            if (scope === 'ttl') {
+                                if (!Number.isNaN(ttlSeconds) && ttlSeconds > 0) {
+                                    window.localStorage.setItem(key, String(Date.now() + ttlSeconds * 1000));
+                                }
+
+                                return;
+                            }
+
+                            window.localStorage.setItem(key, '1');
+                        } catch (e) {
+                            // ignore
+                        }
+                    }
+
+                    function init() {
+                        var banners = document.querySelectorAll('[data-lw-smart-banner-id][data-lw-smart-banner-dismissible="1"]');
+
+                        banners.forEach(function (el) {
+                            if (el.getAttribute('data-lw-smart-banner-dismiss-initialized') === '1') {
+                                return;
+                            }
+
+                            el.setAttribute('data-lw-smart-banner-dismiss-initialized', '1');
+
+                            if (isDismissed(el)) {
+                                removeBanner(el);
+                                return;
+                            }
+
+                            el.classList.remove('lw-smart-banner--dismiss-pending');
+
+                            var btn = el.querySelector('.lw-smart-banner__close');
+
+                            if (!btn) {
+                                return;
+                            }
+
+                            btn.addEventListener('click', function () {
+                                persistDismiss(el);
+                                removeBanner(el);
+                            });
+                        });
+                    }
+
+                    init();
+                })();
+            </script>
         {% endif %}
     {% endif %}
 {% endblock %}

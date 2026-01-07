@@ -1,5 +1,13 @@
 {% sw_extends '@Storefront/storefront/base.html.twig' %}
 
+{% block base_head %}
+    {{ parent() }}
+
+    <script>
+        document.documentElement.classList.add('lw-js');
+    </script>
+{% endblock %}
+
 {% block base_body_inner %}
     {{ parent() }}
 
