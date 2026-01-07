@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-01-07
+
+### Added
+- Admin: banner display mode (inline/overlay) and overlay alignment settings
+- Storefront: global overlay/toast banner rendering with alignment (top-left/top-center/top-right, middle-left/middle-right, bottom-left/bottom-center/bottom-right)
+
+### Changed
+- Inline placements no longer render overlay banners (prevents duplicates)
+
 ## [0.4.0] - 2026-01-07
 
 ### Added

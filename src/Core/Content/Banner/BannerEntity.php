@@ -25,6 +25,10 @@ class BannerEntity extends Entity
      */
     protected ?array $positions = null;
 
+    protected ?string $displayMode = null;
+
+    protected ?string $overlayAlignment = null;
+
     protected ?string $ruleId;
 
     protected ?RuleEntity $rule;
@@ -104,6 +108,26 @@ class BannerEntity extends Entity
     public function setPositions(?array $positions): void
     {
         $this->positions = $positions;
+    }
+
+    public function getDisplayMode(): ?string
+    {
+        return $this->displayMode;
+    }
+
+    public function setDisplayMode(?string $displayMode): void
+    {
+        $this->displayMode = $displayMode;
+    }
+
+    public function getOverlayAlignment(): ?string
+    {
+        return $this->overlayAlignment;
+    }
+
+    public function setOverlayAlignment(?string $overlayAlignment): void
+    {
+        $this->overlayAlignment = $overlayAlignment;
     }
 
     public function getRuleId(): ?string

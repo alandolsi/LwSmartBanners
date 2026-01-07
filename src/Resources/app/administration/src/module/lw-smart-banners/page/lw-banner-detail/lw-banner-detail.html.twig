@@ -106,6 +106,26 @@
                     </sw-multi-select>
                     {% endblock %}
 
+                    {% block lw_banner_detail_base_content_field_display_mode %}
+                    <sw-single-select
+                        :value="banner.displayMode"
+                        @update:value="banner.displayMode = $event"
+                        :label="$tc('lw-smart-banners.detail.labelDisplayMode')"
+                        :helpText="$tc('lw-smart-banners.detail.helpDisplayMode')"
+                        :options="displayModeOptions">
+                    </sw-single-select>
+                    {% endblock %}
+
+                    {% block lw_banner_detail_base_content_field_overlay_alignment %}
+                    <sw-single-select
+                        v-if="banner.displayMode === 'overlay'"
+                        :value="banner.overlayAlignment"
+                        @update:value="banner.overlayAlignment = $event"
+                        :label="$tc('lw-smart-banners.detail.labelOverlayAlignment')"
+                        :options="overlayAlignmentOptions">
+                    </sw-single-select>
+                    {% endblock %}
+
                     {% block lw_banner_detail_base_content_field_rule %}
                     <sw-entity-single-select
                         v-model:value="banner.ruleId"

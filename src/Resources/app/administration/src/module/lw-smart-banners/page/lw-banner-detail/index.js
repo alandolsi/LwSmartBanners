@@ -61,6 +61,26 @@ Shopware.Component.register('lw-banner-detail', {
             ];
         },
 
+        displayModeOptions() {
+            return [
+                { value: 'inline', label: this.$tc('lw-smart-banners.detail.displayModeInline') },
+                { value: 'overlay', label: this.$tc('lw-smart-banners.detail.displayModeOverlay') }
+            ];
+        },
+
+        overlayAlignmentOptions() {
+            return [
+                { value: 'top-left', label: this.$tc('lw-smart-banners.detail.overlayTopLeft') },
+                { value: 'top-center', label: this.$tc('lw-smart-banners.detail.overlayTopCenter') },
+                { value: 'top-right', label: this.$tc('lw-smart-banners.detail.overlayTopRight') },
+                { value: 'middle-left', label: this.$tc('lw-smart-banners.detail.overlayMiddleLeft') },
+                { value: 'middle-right', label: this.$tc('lw-smart-banners.detail.overlayMiddleRight') },
+                { value: 'bottom-left', label: this.$tc('lw-smart-banners.detail.overlayBottomLeft') },
+                { value: 'bottom-center', label: this.$tc('lw-smart-banners.detail.overlayBottomCenter') },
+                { value: 'bottom-right', label: this.$tc('lw-smart-banners.detail.overlayBottomRight') }
+            ];
+        },
+
         ruleCriteria() {
             const criteria = new Criteria(1, 25);
             criteria.addSorting(Criteria.sort('name', 'ASC'));
@@ -88,6 +108,8 @@ Shopware.Component.register('lw-banner-detail', {
                 this.banner.priority = 0;
                 this.banner.type = 'info';
                 this.banner.positions = [];
+                this.banner.displayMode = 'inline';
+                this.banner.overlayAlignment = 'bottom-right';
             } else {
                 this.bannerId = this.$route.params.id;
                 this.banner = this.bannerRepository.create(Shopware.Context.api);
@@ -103,6 +125,14 @@ Shopware.Component.register('lw-banner-detail', {
 
                 if (!Array.isArray(this.banner.positions)) {
                     this.banner.positions = [];
+                }
+
+                if (!this.banner.displayMode) {
+                    this.banner.displayMode = 'inline';
+                }
+
+                if (!this.banner.overlayAlignment) {
+                    this.banner.overlayAlignment = 'bottom-right';
                 }
             } catch (error) {
                 this.createNotificationError({
@@ -138,6 +168,10 @@ Shopware.Component.register('lw-banner-detail', {
             try {
                 if (Array.isArray(this.banner.positions) && this.banner.positions.length === 0) {
                     this.banner.positions = null;
+                }
+
+                if (this.banner.displayMode === 'inline') {
+                    this.banner.overlayAlignment = null;
                 }
 
                 await this.bannerRepository.save(this.banner);
