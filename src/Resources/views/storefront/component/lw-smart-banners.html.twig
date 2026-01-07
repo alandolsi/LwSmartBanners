@@ -1,18 +1,36 @@
 {% block lw_smart_banners %}
+    {% set position = lwSmartBannersPosition|default(null) %}
+
     {% if lwSmartBanners and lwSmartBanners|length > 0 %}
-        <div class="lw-smart-banners">
-            {% for banner in lwSmartBanners %}
-                {% block lw_smart_banner_item %}
-                    <div class="lw-smart-banner lw-smart-banner--{{ banner.type }} {{ banner.cssClass }}"
-                         data-lw-smart-banner-id="{{ banner.id }}">
-                        {% block lw_smart_banner_content %}
-                            <div class="lw-smart-banner-content">
-                                {{ banner.content|raw }}
-                            </div>
-                        {% endblock %}
-                    </div>
-                {% endblock %}
-            {% endfor %}
-        </div>
+        {% set visibleBanners = [] %}
+
+        {% for banner in lwSmartBanners %}
+            {% set showBanner = true %}
+
+            {% if position %}
+                {% set showBanner = (banner.positions is empty) or (position in banner.positions) %}
+            {% endif %}
+
+            {% if showBanner %}
+                {% set visibleBanners = visibleBanners|merge([banner]) %}
+            {% endif %}
+        {% endfor %}
+
+        {% if visibleBanners|length > 0 %}
+            <div class="lw-smart-banners">
+                {% for banner in visibleBanners %}
+                    {% block lw_smart_banner_item %}
+                        <div class="lw-smart-banner lw-smart-banner--{{ banner.type }} {{ banner.cssClass }}"
+                             data-lw-smart-banner-id="{{ banner.id }}">
+                            {% block lw_smart_banner_content %}
+                                <div class="lw-smart-banner-content">
+                                    {{ banner.content|raw }}
+                                </div>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                {% endfor %}
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock %}

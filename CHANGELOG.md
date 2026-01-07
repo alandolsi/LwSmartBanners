@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-01-07
+
+### Added
+- Admin: per-banner placement selection (header, offcanvas cart, cart, checkout confirm/finish, PDP)
+- Storefront: banner rendering filtered by configured placement
+
+### Changed
+- Backward compatible behavior: if placements are empty, banner is shown everywhere (legacy)
+
 ## [0.2.2] - 2026-01-06
 
 ### Added

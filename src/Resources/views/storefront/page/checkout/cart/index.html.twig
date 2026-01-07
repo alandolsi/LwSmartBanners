@@ -1,7 +1,7 @@
 {% sw_extends '@Storefront/storefront/page/checkout/cart/index.html.twig' %}
 
 {% block page_checkout_cart %}
-    {% sw_include '@LwSmartBanners/storefront/component/lw-smart-banners.html.twig' %}
+    {% sw_include '@LwSmartBanners/storefront/component/lw-smart-banners.html.twig' with { lwSmartBannersPosition: 'cart' } %}
 
     {{ parent() }}
 {% endblock %}

@@ -50,6 +50,17 @@ Shopware.Component.register('lw-banner-detail', {
             ];
         },
 
+        positionOptions() {
+            return [
+                { value: 'header', label: this.$tc('lw-smart-banners.detail.positionHeader') },
+                { value: 'offcanvas_cart', label: this.$tc('lw-smart-banners.detail.positionOffcanvasCart') },
+                { value: 'cart', label: this.$tc('lw-smart-banners.detail.positionCart') },
+                { value: 'checkout_confirm', label: this.$tc('lw-smart-banners.detail.positionCheckoutConfirm') },
+                { value: 'checkout_finish', label: this.$tc('lw-smart-banners.detail.positionCheckoutFinish') },
+                { value: 'pdp', label: this.$tc('lw-smart-banners.detail.positionPdp') }
+            ];
+        },
+
         ruleCriteria() {
             const criteria = new Criteria(1, 25);
             criteria.addSorting(Criteria.sort('name', 'ASC'));
@@ -76,6 +87,7 @@ Shopware.Component.register('lw-banner-detail', {
                 this.banner.active = true;
                 this.banner.priority = 0;
                 this.banner.type = 'info';
+                this.banner.positions = [];
             } else {
                 this.bannerId = this.$route.params.id;
                 this.banner = this.bannerRepository.create(Shopware.Context.api);
@@ -88,6 +100,10 @@ Shopware.Component.register('lw-banner-detail', {
 
             try {
                 this.banner = await this.bannerRepository.get(this.bannerId, Shopware.Context.api);
+
+                if (!Array.isArray(this.banner.positions)) {
+                    this.banner.positions = [];
+                }
             } catch (error) {
                 this.createNotificationError({
                     message: this.$tc('lw-smart-banners.detail.errorLoadingBanner')
@@ -120,6 +136,10 @@ Shopware.Component.register('lw-banner-detail', {
             this.isLoading = true;
 
             try {
+                if (Array.isArray(this.banner.positions) && this.banner.positions.length === 0) {
+                    this.banner.positions = null;
+                }
+
                 await this.bannerRepository.save(this.banner);
 
                 this.isLoading = false;

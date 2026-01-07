@@ -3,5 +3,5 @@
 {% block component_offcanvas_cart_flashbags %}
     {{ parent() }}
 
-    {% sw_include '@LwSmartBanners/storefront/component/lw-smart-banners.html.twig' %}
+    {% sw_include '@LwSmartBanners/storefront/component/lw-smart-banners.html.twig' with { lwSmartBannersPosition: 'offcanvas_cart' } %}
 {% endblock %}

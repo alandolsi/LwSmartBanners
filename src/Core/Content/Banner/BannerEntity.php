@@ -20,6 +20,11 @@ class BannerEntity extends Entity
 
     protected ?string $cssClass;
 
+    /**
+     * @var string[]|null
+     */
+    protected ?array $positions = null;
+
     protected ?string $ruleId;
 
     protected ?RuleEntity $rule;
@@ -83,6 +88,22 @@ class BannerEntity extends Entity
     public function setCssClass(?string $cssClass): void
     {
         $this->cssClass = $cssClass;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    public function getPositions(): ?array
+    {
+        return $this->positions;
+    }
+
+    /**
+     * @param string[]|null $positions
+     */
+    public function setPositions(?array $positions): void
+    {
+        $this->positions = $positions;
     }
 
     public function getRuleId(): ?string

@@ -1,0 +1,7 @@
+{% sw_extends '@Storefront/storefront/page/content/product-detail.html.twig' %}
+
+{% block cms_content %}
+    {% sw_include '@LwSmartBanners/storefront/component/lw-smart-banners.html.twig' with { lwSmartBannersPosition: 'pdp' } %}
+
+    {{ parent() }}
+{% endblock %}
