@@ -18,7 +18,9 @@ Shopware.Component.register('lw-banner-detail', {
             isLoading: false,
             processSuccess: false,
             bannerId: null,
-            showDeleteModal: false
+            showDeleteModal: false,
+            dismissTtlValue: 24,
+            dismissTtlUnit: 'hours'
         };
     },
 
@@ -81,6 +83,21 @@ Shopware.Component.register('lw-banner-detail', {
             ];
         },
 
+        dismissScopeOptions() {
+            return [
+                { value: 'forever', label: this.$tc('lw-smart-banners.detail.dismissScopeForever') },
+                { value: 'session', label: this.$tc('lw-smart-banners.detail.dismissScopeSession') },
+                { value: 'ttl', label: this.$tc('lw-smart-banners.detail.dismissScopeTtl') }
+            ];
+        },
+
+        dismissTtlUnitOptions() {
+            return [
+                { value: 'hours', label: this.$tc('lw-smart-banners.detail.dismissTtlUnitHours') },
+                { value: 'days', label: this.$tc('lw-smart-banners.detail.dismissTtlUnitDays') }
+            ];
+        },
+
         ruleCriteria() {
             const criteria = new Criteria(1, 25);
             criteria.addSorting(Criteria.sort('name', 'ASC'));
@@ -110,6 +127,9 @@ Shopware.Component.register('lw-banner-detail', {
                 this.banner.positions = [];
                 this.banner.displayMode = 'inline';
                 this.banner.overlayAlignment = 'bottom-right';
+                this.banner.dismissible = false;
+                this.banner.dismissScope = 'forever';
+                this.banner.dismissTtlSeconds = null;
             } else {
                 this.bannerId = this.$route.params.id;
                 this.banner = this.bannerRepository.create(Shopware.Context.api);
@@ -133,6 +153,28 @@ Shopware.Component.register('lw-banner-detail', {
 
                 if (!this.banner.overlayAlignment) {
                     this.banner.overlayAlignment = 'bottom-right';
+                }
+
+                if (this.banner.dismissible === null || this.banner.dismissible === undefined) {
+                    this.banner.dismissible = false;
+                }
+
+                if (this.banner.dismissible && !this.banner.dismissScope) {
+                    this.banner.dismissScope = 'forever';
+                }
+
+                if (this.banner.dismissible && this.banner.dismissScope === 'ttl' && this.banner.dismissTtlSeconds) {
+                    const seconds = parseInt(this.banner.dismissTtlSeconds, 10);
+
+                    if (!Number.isNaN(seconds) && seconds > 0) {
+                        if (seconds % 86400 === 0) {
+                            this.dismissTtlUnit = 'days';
+                            this.dismissTtlValue = seconds / 86400;
+                        } else {
+                            this.dismissTtlUnit = 'hours';
+                            this.dismissTtlValue = Math.max(1, Math.round(seconds / 3600));
+                        }
+                    }
                 }
             } catch (error) {
                 this.createNotificationError({
@@ -172,6 +214,27 @@ Shopware.Component.register('lw-banner-detail', {
 
                 if (this.banner.displayMode === 'inline') {
                     this.banner.overlayAlignment = null;
+                }
+
+                if (!this.banner.dismissible) {
+                    this.banner.dismissScope = null;
+                    this.banner.dismissTtlSeconds = null;
+                } else {
+                    if (!this.banner.dismissScope) {
+                        this.banner.dismissScope = 'forever';
+                    }
+
+                    if (this.banner.dismissScope === 'ttl') {
+                        const value = parseInt(this.dismissTtlValue, 10);
+
+                        if (!Number.isNaN(value) && value > 0) {
+                            this.banner.dismissTtlSeconds = value * (this.dismissTtlUnit === 'days' ? 86400 : 3600);
+                        } else {
+                            this.banner.dismissTtlSeconds = null;
+                        }
+                    } else {
+                        this.banner.dismissTtlSeconds = null;
+                    }
                 }
 
                 await this.bannerRepository.save(this.banner);

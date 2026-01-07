@@ -29,6 +29,12 @@ class BannerEntity extends Entity
 
     protected ?string $overlayAlignment = null;
 
+    protected ?bool $dismissible = null;
+
+    protected ?string $dismissScope = null;
+
+    protected ?int $dismissTtlSeconds = null;
+
     protected ?string $ruleId;
 
     protected ?RuleEntity $rule;
@@ -128,6 +134,41 @@ class BannerEntity extends Entity
     public function setOverlayAlignment(?string $overlayAlignment): void
     {
         $this->overlayAlignment = $overlayAlignment;
+    }
+
+    public function getDismissible(): bool
+    {
+        return (bool) $this->dismissible;
+    }
+
+    public function setDismissible(bool $dismissible): void
+    {
+        $this->dismissible = $dismissible;
+    }
+
+    public function isDismissible(): bool
+    {
+        return (bool) $this->dismissible;
+    }
+
+    public function getDismissScope(): ?string
+    {
+        return $this->dismissScope;
+    }
+
+    public function setDismissScope(?string $dismissScope): void
+    {
+        $this->dismissScope = $dismissScope;
+    }
+
+    public function getDismissTtlSeconds(): ?int
+    {
+        return $this->dismissTtlSeconds;
+    }
+
+    public function setDismissTtlSeconds(?int $dismissTtlSeconds): void
+    {
+        $this->dismissTtlSeconds = $dismissTtlSeconds;
     }
 
     public function getRuleId(): ?string

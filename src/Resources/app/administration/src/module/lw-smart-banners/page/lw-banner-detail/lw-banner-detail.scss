@@ -1,3 +1,9 @@
 .lw-banner-detail {
-    
+    .lw-banner-detail__dismiss-ttl-unit {
+        min-width: 160px;
+
+        .sw-single-select__selection-text {
+            width: 100%;
+        }
+    }
 }

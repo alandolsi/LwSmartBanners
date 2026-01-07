@@ -3,11 +3,11 @@
   "entryPoints": {
     "lw-smart-banners": {
       "css": [
-        "/bundles/lwsmartbanners/administration/assets/lw-smart-banners-B2tJ14dk.css"
+        "/bundles/lwsmartbanners/administration/assets/lw-smart-banners-DWo6CECs.css"
       ],
       "dynamic": [],
       "js": [
-        "/bundles/lwsmartbanners/administration/assets/lw-smart-banners-JEzYAgDd.js"
+        "/bundles/lwsmartbanners/administration/assets/lw-smart-banners-DZy_ThQA.js"
       ],
       "legacy": false,
       "preload": []

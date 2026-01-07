@@ -57,6 +57,12 @@ class BannerDefinition extends EntityDefinition
             (new StringField('display_mode', 'displayMode'))->addFlags(new ApiAware()),
 
             (new StringField('overlay_alignment', 'overlayAlignment'))->addFlags(new ApiAware()),
+
+            (new BoolField('dismissible', 'dismissible'))->addFlags(new ApiAware()),
+
+            (new StringField('dismiss_scope', 'dismissScope'))->addFlags(new ApiAware()),
+
+            (new IntField('dismiss_ttl_seconds', 'dismissTtlSeconds'))->addFlags(new ApiAware()),
             
             (new FkField('rule_id', 'ruleId', RuleDefinition::class))->addFlags(new ApiAware()),
             

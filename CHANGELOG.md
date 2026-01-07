@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.2] - 2026-01-07
+
+### Added
+- Admin: dismissible banners with frequency control (never, next session, after delay)
+- Storefront: close button + persistence (sessionStorage/localStorage) to hide dismissed banners
+
+### Fixed
+- Storefront: prevent dismissed banners from flashing briefly on reload
+
 ## [0.4.1] - 2026-01-07
 
 ### Added

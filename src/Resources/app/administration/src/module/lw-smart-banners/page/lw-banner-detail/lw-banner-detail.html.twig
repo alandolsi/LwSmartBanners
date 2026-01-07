@@ -126,6 +126,45 @@
                     </sw-single-select>
                     {% endblock %}
 
+                    {% block lw_banner_detail_base_content_field_dismissible %}
+                    <sw-switch-field
+                        v-model:value="banner.dismissible"
+                        :label="$tc('lw-smart-banners.detail.labelDismissible')"
+                        :helpText="$tc('lw-smart-banners.detail.helpDismissible')">
+                    </sw-switch-field>
+                    {% endblock %}
+
+                    {% block lw_banner_detail_base_content_field_dismiss_scope %}
+                    <sw-single-select
+                        v-if="banner.dismissible"
+                        :value="banner.dismissScope"
+                        @update:value="banner.dismissScope = $event"
+                        :label="$tc('lw-smart-banners.detail.labelDismissScope')"
+                        :options="dismissScopeOptions">
+                    </sw-single-select>
+                    {% endblock %}
+
+                    {% block lw_banner_detail_base_content_field_dismiss_ttl %}
+                    <sw-container
+                        v-if="banner.dismissible && banner.dismissScope === 'ttl'"
+                        columns="2fr 2fr"
+                        gap="0 30px">
+                        <sw-number-field
+                            v-model="dismissTtlValue"
+                            :label="$tc('lw-smart-banners.detail.labelDismissTtl')"
+                            numberType="int"
+                            min="1">
+                        </sw-number-field>
+
+                        <sw-single-select
+                            v-model:value="dismissTtlUnit"
+                            class="lw-banner-detail__dismiss-ttl-unit"
+                            :label="$tc('lw-smart-banners.detail.labelDismissTtlUnit')"
+                            :options="dismissTtlUnitOptions">
+                        </sw-single-select>
+                    </sw-container>
+                    {% endblock %}
+
                     {% block lw_banner_detail_base_content_field_rule %}
                     <sw-entity-single-select
                         v-model:value="banner.ruleId"
